@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ config["name"] }} | Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- ======================================================
+     FIXED HEADER SECTION (scrolls with user on desktop)
+========================================================= -->
+
+<!-- ================= HEADER SECTION ================= -->
+<header id="main-header">
+    <div class="header-content">
+        <h1>{{ config.header.line1 }}</h1>
+        <p class="subtitle">{{ config.header.line2 }}</p>
+        {% if config.header.line3 %}
+            <p class="subtitle">{{ config.header.line3 }}</p>
+        {% endif %}
+        <div class="contact-icons">
+            <a href="{{ config.header.linkedin_link }}" target="_blank" title="Visit my LinkedIn profile">
+                <img src="{{ url_for('static', filename=config.header.linkedin_icon) }}" alt="LinkedIn">
+            </a>
+            <a href="{{ config.header.github_link }}" target="_blank" title="Visit my GitHub profile">
+                <img src="{{ url_for('static', filename=config.header.github_icon) }}" alt="GitHub">
+            </a>
+        </div>
+    </div>
+
+    <!-- Links section (scrolls with header) -->
+    <nav class="nav-links">
+        <a href="#about">About Me</a>
+        <a href="#projects">My Projects</a>
+		<a href="#programming">Programming Experience</a>
+     <!--   <a href="#contact">Contact Me</a>-->
+    </nav>
+</header>
+
+<!-- Divider -->
+<hr class="divider">
+
+
+<!--<header id="main-header">
+    <div class="header-content">
+        <h1 class="site-title">{{ config["name"] }}</h1>
+        <div class="contact-icons">
+            <a href="{{ config['linkedin_url'] }}" target="_blank">
+                <img src="{{ url_for('static', filename=config['linkedin_icon']) }}" alt="LinkedIn">
+            </a>
+            <a href="{{ config['github_url'] }}" target="_blank">
+                <img src="{{ url_for('static', filename=config['github_icon']) }}" alt="GitHub">
+            </a>
+            <a href="mailto:{{ config['email'] }}">{{ config['email'] }}</a>
+        </div>
+    </div>
+
+    <!-- NAVIGATION LINKS SECTION (scrolls with header on desktop) -->                    i'm not sur eif this actually needs commenting out.
+ <!--   <nav class="nav-links">
+        <a href="#about">About Me</a>
+        <a href="#projects">My Projects</a>
+		<a href="#programming">Programming Experience</a>
+       <!-- <a href="#contact">Contact Me</a>-->
+    </nav>
+</header>-->
+
+<!-- ======================================================
+     ABOUT ME SECTION
+========================================================= -->
+<section id="about" class="content-section">
+    <h2>About Me</h2>
+    <div class="about-container">
+	<img src="{{ url_for('static', filename=config.about.photo) }}" alt="About Me Photo" class="about-photo">
+        <p class="subtitle">{{ config.about.text }}</p>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- ======================================================
+     Programming Skills--- this is experimental, if you delete it you will want to delete the part in the nav links section.
+========================================================= -->
+<section id="programming" class="content-section">
+    <h2>Programming Experience</h2>
+    <div class="programming-container">
+	<img src="{{ url_for('static', filename=config.programming.photo) }}" alt="Programming Experience Photo" class="programming-photo">
+		<ul class="skills-list">
+			{% for skill in config.programming.skills %}
+				<li>{{ skill }}</li>
+			{% endfor %}
+		</ul>
+
+
+<!--	  <p class="subtitle">{{ config.programming.text}}</p>-->
+
+    </div>
+</section>
+
+<hr class="divider">
+<!-- ======================================================
+     PROJECTS SECTION
+========================================================= -->
+<section id="projects" class="content-section">
+    <h2>My Projects</h2>
+    <div class="project-grid">
+        {% for project in config["projects"] %}
+        <div class="project-item" 
+             {% if project.image %}
+             style="background-image: url('{{ url_for('static', filename=project.image) }}');"
+             {% endif %}>
+             
+           <!-- <a href="{{ project.link }}" class="project-link" target="_self"> wasn't working so commented to try again. -->
+            <a href="{{ url_for('static', filename=project.link) }}" class="project-link" target="_blank">   
+				<div class="project-overlay">
+                    <h3 class="project-title">{{ project.title }}</h3>
+                    <p class="project-description">{{ project.description }}</p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- ======================================================
+     CONTACT SECTION - currently disabled.
+========================================================= -->
+<!--<section id="contact" class="content-section">
+    <h2>Contact Me</h2>
+    <form id="contact-form" method="POST">
+        <input type="text" placeholder="Your Name" name="name" required>
+        <input type="email" placeholder="Your Email" name="email" required>
+        <textarea placeholder="Your Message" name="message" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+</section>
+
+<hr class="divider">
+
+<!-- ======================================================
+     FOOTER SECTION
+========================================================= -->
+<footer id="footer">
+    <div class="footer-content">
+        <a href="{{ config.header.linkedin_link }}" target="_blank" title="Visit my GitHub profile">LinkedIn</a> |
+        <a href="{{ config.header.github_link }}" target="_blank" title="Visit my GitHub profile">GitHub</a>
+    </div>
+</footer>
+
+<!-- ======================================================
+     BACK TO TOP BUTTON (Hidden until scrolled)
+========================================================= -->
+<div id="back-to-top">
+    <a href="#main-header">Back to Top</a>
+</div>
+
+
+
+
+<!-- ======================================================
+     BEGIN JAVASCRIPT FOR INTERACTIVITY
+========================================================= -->
+
+<script>
+window.addEventListener('scroll', function() {
+    const topButton = document.getElementById('back-to-top');
+    if (window.scrollY > 200) {
+        topButton.style.display = 'block';
+    } else {
+        topButton.style.display = 'none';
+    }
+});
+
+// Smooth scroll to top on click
+document.getElementById('back-to-top').addEventListener('click', function(event) {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+
+
+
+<!-- ======================================================
+     BEGIN JAVASCRIPT FOR modal
+========================================================= -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.getElementById("project-modal");
+    const modalBody = document.getElementById("modal-body");
+    const closeBtn = document.querySelector(".close-button");
+
+    document.querySelectorAll(".project-link").forEach(link => {
+        link.addEventListener("click", function(event) {
+            event.preventDefault();
+            const projectUrl = this.getAttribute("href");
+            const lowerUrl = projectUrl.toLowerCase();
+
+            // Smart detection
+            if (lowerUrl.endsWith(".jpg") || lowerUrl.endsWith(".png") || lowerUrl.endsWith(".jpeg") || lowerUrl.endsWith(".gif")) {
+                modalBody.innerHTML = `<img src="${projectUrl}" alt="Project Image" style="max-width:100%; height:auto; display:block; margin:auto;">`;
+            } 
+            else if (lowerUrl.endsWith(".pdf")) {
+                modalBody.innerHTML = `<iframe src="${projectUrl}" type="application/pdf" allowfullscreen></iframe>`;
+            } 
+            else if (lowerUrl.includes("tableau.com") || lowerUrl.endsWith(".html")) {
+                modalBody.innerHTML = `<iframe src="${projectUrl}" allowfullscreen></iframe>`;
+            } 
+            else {
+                // fallback → open normally
+                window.open(projectUrl, "_blank");
+                return;
+            }
+
+            // Show modal
+            modal.style.display = "block";
+        });
+    });
+
+    closeBtn.addEventListener("click", function() {
+        modal.style.display = "none";
+        modalBody.innerHTML = "";
+    });
+
+    window.addEventListener("click", function(e) {
+        if (e.target === modal) {
+            modal.style.display = "none";
+            modalBody.innerHTML = "";
+        }
+    });
+});
+</script>
+<!-- ======================================================
+     PROJECT PREVIEW MODAL
+========================================================= -->
+<div id="project-modal" class="modal">
+    <span class="close-button">&times;</span>
+    <div id="modal-body"></div>
+</div>
+<!-- END JAVASCRIPT FOR INTERACTIVITY -->
+</body>
+</html>

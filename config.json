@@ -1,0 +1,47 @@
+{
+  "header": {
+    "line1": "Trevor Michel",
+    "line2": "Winona State University | Data Science Major | Data Support Analyst - Fastenal",
+    "line3": "",
+    "linkedin_icon": "images/linkedin_icon.jpg",
+    "linkedin_link": "https://www.linkedin.com/in/trevor-michel-0a4b46128",
+    "github_icon": "images/github_icon.jpg",
+    "github_link": "https://github.com/tmichel3796"
+  },
+  "about": {
+    "photo": "images/about_photo.jpg",
+    "text": "I am a Data Science student at Winona State University with a passion for analytics, visualization, and applied machine learning. I currently live in Winona, Minnesota."
+  },
+  "programming": {
+  "photo": "images/about_photo.jpg",
+  "skills": [
+    "Python – Data analysis and visualization with Pandas and Matplotlib",
+    "SQL – Query optimization and database design",
+    "Power BI – Interactive dashboards and KPI reporting",
+    "Machine Learning – Model training using scikit-learn",
+    "Git/GitHub – Version control and collaboration"
+  ]
+},
+
+  
+  "projects": [
+    {
+      "title": "Predictive Model",
+      "description": "A regression analysis using Python and scikit-learn.",
+      "link": "projects/Capture.PNG",
+      "image": "images/project1.jpg"
+    },
+    {
+      "title": "Interactive Dashboard",
+      "description": "A Power BI dashboard for real-time business metrics.",
+      "link": "projects/dashboard.html",
+      "image": ""
+    },
+	{
+      "title": "Interactive Dashboard",
+      "description": "A Power BI dashboard for real-time business metrics.",
+      "link": "projects/project1.pdf",
+      "image": "images/project1.jpg"
+    }
+  ]
+}
